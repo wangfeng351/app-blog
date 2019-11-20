@@ -83,12 +83,12 @@
 			/* 取出"="之后的字符串   左闭右开*/
 			var id = query.substring(i+1);
 			/* 获取对应作者id的信息 */
-			this.axios.get('http://localhost:8080/users/' + id).then(res =>{
+			this.axios.get(this.baseUrl + '/users/' + id).then(res =>{
 				this.user = res.data.data;
 			}),
 			
 			/* 两表联查 */
-			this.axios.get('http://localhost:8080/article/' + id).then(res =>{
+			this.axios.get(this.baseUrl+ '/article/' + id).then(res =>{
 				this.userArticle = res.data.data;
 				console.log(res.data.data);
 			})

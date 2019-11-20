@@ -1,10 +1,8 @@
 <template>
 	<div>
-		<input type="text" id="code" v-model="cd">
-		<p>
-			{{code.code}}
-		</p>
-		<button @click="verf">点击验证码</button>
+		<div>
+			
+		</div>
 	</div>
 </template>
 
@@ -24,9 +22,7 @@
 		},
 		methods:{
 			verf(){
-				if(this.cd == this.code.code){
-					alert("验证成功");
-				}
+				
 			}
 		}
 	}

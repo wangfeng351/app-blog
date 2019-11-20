@@ -2,9 +2,13 @@
 4<template>
 	<div>
 		<div class="nav bl-df-between">
-			<ul>
+			<ul class="bl-df-left">
 				<li class="bl-logo">
 					<img src="http://n.sinaimg.cn/tech/crawl/20171102/Lb2d-fynmzuk2821777.jpg" alt="">
+				</li>
+				<li class="bl-df-left">
+					<input type="text" class="bl-input-box search-input" v-model="search">
+					<button @click="check()"  class="bl-btn bl-btn-round search-btn">搜索</button>
 				</li>
 			</ul>
 		<ul class="bl-df-right">
@@ -15,10 +19,10 @@
 				<router-link to = "/article">文章</router-link>
 			</li>
 			<li>
-				<router-link to = "/album">相册</router-link>
+				<router-link to = "/album">热门推荐</router-link>
 			</li>
 			<li>
-				<router-link to = "/message">留言</router-link>
+				<router-link to = "/message">论坛</router-link>
 			</li>
 			<li v-if="this.user">
 				<button class="bl-btn bl-btn-circle bl-avatar">
@@ -43,24 +47,37 @@
 
 <script>
 	export default {
-		data(){
-			
+		data() {
 			return {
-				/* 解析中的用户数据并且将值赋给user对象 */
-				user: JSON.parse(localStorage.getItem('user'))
-			}
+				articleDto : {
+					title : ''
+				},
+				article : [] ,
+				search : '',
+				user : JSON.parse(localStorage.getItem("user"))
+			} 
 		},
 		
-		create : function(){
+		created : function(){
 			
-			
-		},
+		}	,
+		
 		methods:{
-			logout() {
-				this.user = null;
+			
+			check () {
+				this.articleDto.title = this.search;
+				this.axios.post(this.baseURL+ '/articles' ,JSON.stringify(this.articleDto)).then(response => {
+								this.article = response.data.data;
+								alert(response.data.data.length);
+								this.$router.push("/article");
+								});
+				
+			},
+			
+			logout(){
 				localStorage.clear();
-		    }
-		},
+			}
+		}
 	}
 </script>
 
@@ -86,6 +103,16 @@
 		font-size: 18px;
 		font-weight: 500;
 		text-align: center;
+	}
+	
+	.search-btn {
+		width: 120px;
+		height: 30px;
+	}
+	
+	.seatch-input {
+		width: 200px;
+		height: 30px;
 	}
 	
 </style>

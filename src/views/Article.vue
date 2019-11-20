@@ -1,6 +1,13 @@
 <template>
 	<div>
-		<router-link to="http://2e7i154970.qicp.vip:51000/code">button @click="check">视频资源预览</button></router-link>
+		<input type="text" value="搜索" v-model="search">
+		<button @click="check()">点击</button>
+		<!-- <h2>文章信息</h2> -->
+		<p v-for="(article, index) in article" :key = "index">
+			{{article.title}}
+			
+			
+		</p>
 	</div>
 </template>
 
@@ -8,14 +15,29 @@
 	export default {
 		data() {
 			return {
+				articleDto : {
+					title : ''
+				},
+				article : [] ,
+				search : ''
 			} 
 		},
 		
 		created : function(){
-				this.axios.post()
-		},
+			this.axios.get(this.baseURL+  '/article').then(response=>{
+				this.article = response.data.data;
+			})
+		}	,
+		
 		methods:{
 			
+			check () {
+				this.articleDto.title = this.search;
+				this.axios.post(this.baseURL + '/articles' ,JSON.stringify(this.articleDto)).then(response => {
+								this.article = response.data.data;
+								alert(response.data.data.length);
+								});
+			}
 		}
 	}
 	

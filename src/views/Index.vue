@@ -109,7 +109,7 @@
 		created : function() {
 			
 			/* 查询所有文章 */
-			this.axios.get('http://localhost:8080/article').then(response=>{
+			this.axios.get(this.baseURL+  '/article').then(response=>{
 				this.articles = response.data.data;
 			}),
 			
@@ -119,19 +119,13 @@
 			}),
 			
 			/* 查询所有用户 */
-			this.axios.get('http://localhost:8080/users').then(res =>{
+			this.axios.get(this.baseURL+ '/users').then(res =>{
 				this.users = res.data.data;
 				console.log(res.data.data);
 			})
 		},
 		
 		methods:{
-			
-			search(title){
-				this.axios.post('http://localhost:8080/articles', JSON.stringify(this.ArticleDto)).then(response => {
-					console.log(response.data.data);
-				})
-			},
 			
 			gotoPersonalDetail(id) {
 				 this.$router.push('/persondeatil?id=' + id);

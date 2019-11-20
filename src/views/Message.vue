@@ -1,22 +1,105 @@
 <template>
 	<div>
-		<h2>信息</h2>
+		<div class="bl-df-start">
+			<div class="bl-col-8 left">
+				<div>
+					<h3>热帖交流区</h3>
+				</div>
+				<div class="bl-card c" v-for="(article, index) in articles" :key="index">
+					<div class="title-colum bl-df-between">
+						<div class="bl-col-8 bl-sub-title">{{article.title}}</div>
+						<div class="bl-df-around bl-col-4 bl-msm-font">
+							<span>提问人:{{article.authorId}}</span>
+							<span>回复数:{{article.forwardAccount}}</span>
+							<span>关注数:{{article.likeAccount}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bl-col-4 right">
+				<h3>荣誉榜</h3>
+				<div class="bl-df-c-center" v-for="(users, index) in users.slice(20,23)" :key = "index">
+				<div class = "bl-right-sideCard bl-df-left">
+					<div class="bl-content-avatar" @click="jump-personal">
+						<img :src="users.avatar" class="bl-btn-circle" alt="" @click="gotoPersonalDetail(users.id)">
+					</div>
+					<div class="bl-df-c-center">
+						<p class="bl-md-font bl-bd-font">{{users.nickname}}</p>
+						<p class="bottom bl-df-between">
+							<span>文章数：0</span>
+							<span>粉丝量:{{users.fans}}</span>
+						</p>
+					</div>
+				</div>
+				</div>
+				<h3>论坛标兵</h3>
+				<div class="bl-df-c-center" v-for="(users, index) in users.slice(14,18)" :key="index">
+					<div class="bl-right-sideCard bl-df-left">
+						<div class="bl-content-avatar" @click="jump-personal">
+							<img :src="users.avatar" class="bl-btn-circle" alt="" @click="gotoPersonalDetail(users.id)">
+						</div>
+						<div class="bl-df-c-center">
+							<p class="bl-md-font bl-bd-font">{{users.nickname}}</p>
+							<p class="bottom bl-df-between">
+								<span>文章数：0</span>
+								<span>粉丝量:{{users.fans}}</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
 	export default {
-		data(){
+		data() {
 			return {
-				
+				articles: []
 			}
-			
-			methods:{
-				
-			}
+		},
+
+		created: function() {
+			this.axios.get(this.baseURL + '/article').then(response => {
+					this.articles = response.data.data;
+				}),
+			this.axios.get(this.baseURL + '/users').then(res => {
+		     	this.users = res.data.data;
+				console.log(res.data.data);
+				})
+		},
+
+		methods: {
+
 		}
+
 	}
 </script>
 
-<style>
+<style scoped>
+	.title-colum {
+		height: 30px;
+		width: 100%;
+		margin-top: 10px;
+	}
+
+	.user-descripiton {
+		height: 25px;
+	}
+
+	.ar-right {
+		height: 100%;
+		width: 100%;
+		padding: 10px 10px;
+	}
+
+	.article-description {
+		width: 100%;
+		margin-top: 10px;
+		height: 120px;
+		font-size: 12px;
+		line-height: 20px;
+		font-family: "雅黑";
+	}
 </style>
