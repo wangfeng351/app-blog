@@ -5,7 +5,7 @@
 				<input type="text" placeholder="请输入手机号" class="bl-input-box" v-model="userDto.mobile">
 				<input type="password" placeholder="请输入密码" class="bl-input-box" v-model="userDto.password">
 				<input type="text" placeholder="请输入验证码" class="bl-input-box" v-model="userDto.code">
-				<img   @click="refresh()" class="image" src="http://localhost:8080/code" alt="">
+				<img :src="this.codeUrl"  @click="refresh" class="image"  >
 			</div>
 			<div class="body bl-df-center">
 				<button class="bl-btn bl-btn-round bl-btn-default bl-btn-nomar bl-shadow" @click="signIn(userDto)">确定</button>
@@ -26,20 +26,26 @@
 	        password: '',
 			code: ''
 	      },
-		  user : []
+		  user : [],
+		  codeUrl: ''
 	    };
+	  },
+	  
+	  created : function(){
+		  var number = Math.ceil(Math.random() * 10);
+		  this.codeUrl = this.GlOBAL.servelUrl + '/code?num = ' + number;
 	  },
 	  
 	  methods: {
 		refresh() {
 					this.codeUrl = '';
 					var number = Math.ceil(Math.random() * 10);
-					this.codeUrl = this.baseURL + '/code?num = ' + number;
+					this.codeUrl =  this.GlOBAL.servelUrl + '/code?num = ' + number;
 				},
 		
 	    signIn(userDto) {
 			/* 将code放入useDto对象中,通过JSON.stringify()转换成JSON数据 */
-	      this.axios.post(this.$baseURL+ '/sign-in', JSON.stringify(this.userDto)).then(response => {
+	      this.axios.post(this.GlOBAL.servelUrl+ '/sign-in', JSON.stringify(this.userDto)).then(response => {
 	        alert(response.data.msg);
 	        if (response.data.msg === '登录成功') {
 	          //将后台的用户信息存入本地存储

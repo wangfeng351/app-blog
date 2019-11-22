@@ -18,31 +18,31 @@
 			</div>
 			<div class="bl-col-4 right">
 				<h3>荣誉榜</h3>
-				<div class="bl-df-c-center" v-for="(users, index) in users.slice(20,23)" :key = "index">
+				<div class="bl-df-c-center" v-for="(user, index) in users.slice(20,23)" :key = "index">
 				<div class = "bl-right-sideCard bl-df-left">
 					<div class="bl-content-avatar" @click="jump-personal">
-						<img :src="users.avatar" class="bl-btn-circle" alt="" @click="gotoPersonalDetail(users.id)">
+						<img :src="user.avatar" class="bl-btn-circle" alt="" @click="gotoPersonalDetail(user.id)">
 					</div>
 					<div class="bl-df-c-center">
-						<p class="bl-md-font bl-bd-font">{{users.nickname}}</p>
+						<p class="bl-md-font bl-bd-font">{{user.nickname}}</p>
 						<p class="bottom bl-df-between">
 							<span>文章数：0</span>
-							<span>粉丝量:{{users.fans}}</span>
+							<span>粉丝量:{{user.fans}}</span>
 						</p>
 					</div>
 				</div>
 				</div>
 				<h3>论坛标兵</h3>
-				<div class="bl-df-c-center" v-for="(users, index) in users.slice(14,18)" :key="index">
+				<div class="bl-df-c-center" v-for="(user, index) in users.slice(14,18)" :key="index">
 					<div class="bl-right-sideCard bl-df-left">
 						<div class="bl-content-avatar" @click="jump-personal">
-							<img :src="users.avatar" class="bl-btn-circle" alt="" @click="gotoPersonalDetail(users.id)">
+							<img :src="user.avatar" class="bl-btn-circle" alt="" @click="gotoPersonalDetail(user.id)">
 						</div>
 						<div class="bl-df-c-center">
-							<p class="bl-md-font bl-bd-font">{{users.nickname}}</p>
+							<p class="bl-md-font bl-bd-font">{{user.nickname}}</p>
 							<p class="bottom bl-df-between">
 								<span>文章数：0</span>
-								<span>粉丝量:{{users.fans}}</span>
+								<span>粉丝量:{{user.fans}}</span>
 							</p>
 						</div>
 					</div>
@@ -56,15 +56,16 @@
 	export default {
 		data() {
 			return {
-				articles: []
+				articles: [],
+				users: []
 			}
 		},
 
 		created: function() {
-			this.axios.get(this.baseURL + '/article').then(response => {
+			this.axios.get(this.GlOBAL.servelUrl + '/article').then(response => {
 					this.articles = response.data.data;
 				}),
-			this.axios.get(this.baseURL + '/users').then(res => {
+			this.axios.get(this.GlOBAL.servelUrl + '/users').then(res => {
 		     	this.users = res.data.data;
 				console.log(res.data.data);
 				})

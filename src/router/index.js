@@ -3,14 +3,16 @@ import VueRouter from 'vue-router'
 
 import Nav from '@/views/Nav.vue'
 import Login from '@/views/Login.vue'
-import Message from '@/views/Message.vue'
+import Forum from '@/views/Forum.vue'
 import Index from '@/views/Index.vue'
-import Album from '@/views/Album.vue'
-import Basic from '@/views/Basic.vue'
-import Password from '@/views/Password.vue'
+import Recommend from '@/views/Recommend.vue'
 import Article from '@/views/Article.vue'
+import Basic from '@/views/Basic.vue'
+import Empty from '@/views/Empty.vue'
+import Password from '@/views/Password.vue'
 import Personal from '@/views/Personal.vue'
 import PersonalDetail from '@/views/PersonalDetail.vue'
+import SubscriptionColumn from '@/views/SubscriptionColumn.vue'
 
 
 Vue.use(VueRouter)
@@ -30,20 +32,29 @@ const routes = [
 			component : Index
 		},
 		{
-			path : 'article',
-			component : Article 
+			path : 'subscriptioncolumn',
+			component : SubscriptionColumn 
 		},
 		{
-			path : 'album',
-			component : Album
+			path : 'recommend',
+			component : Recommend
 		},
 		{
-			path : 'Message',
-			component : Message
+			path : 'forum',
+			component : Forum
+		},
+		{
+			path : 'empty',
+			component : Empty
 		},
 		{
 			path : 'persondeatil',
 			component : PersonalDetail
+		},
+		{
+			name : 'my-articles',
+			path : 'article',
+			component : Article
 		},
 		{
 			path : 'personal' ,

@@ -38,7 +38,7 @@
 					<span class="tab-item">热门</span>
 			    </div>
 				<div class="tab-box">
-					<div class="bl-df-c-center" v-for="(use, index) in userArticle.slice(0,4)" :key = "index">
+					<div class="bl-df-c-center" v-for="(use, index) in userArticle" :key = "index">
 						<div class="bl-article-recommendation at bl-df-between-up">
 							<div class="bl-df-c-center">
 								<p class="bl-lg-font bl-bd-font">{{use.title}}</p>
@@ -82,15 +82,17 @@
 			var i = query.lastIndexOf("=");
 			/* 取出"="之后的字符串   左闭右开*/
 			var id = query.substring(i+1);
+			// let currentPath = this.$router.path
 			/* 获取对应作者id的信息 */
-			this.axios.get(this.baseUrl + '/users/' + id).then(res =>{
+			this.axios.get(this.GlOBAL.servelUrl + '/users/' + id).then(res =>{
 				this.user = res.data.data;
 			}),
 			
 			/* 两表联查 */
-			this.axios.get(this.baseUrl+ '/article/' + id).then(res =>{
-				this.userArticle = res.data.data;
-				console.log(res.data.data);
+			this.axios.get(this.GlOBAL.servelUrl + '/article/' + id).then(response =>{
+				this.userArticle = response.data.data;
+				console.log("1")
+				console.log(response.data.data)
 			})
 			
 		},

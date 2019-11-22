@@ -1,48 +1,53 @@
 <template>
 	<div>
-		<input type="text" value="搜索" v-model="search">
-		<button @click="check()">点击</button>
-		<!-- <h2>文章信息</h2> -->
-		<p v-for="(article, index) in article" :key = "index">
+		<h2>文章展示 </h2>
+		<p v-for="(article, index)  in articles" :key="index">
 			{{article.title}}
-			
-			
 		</p>
 	</div>
 </template>
 
 <script>
 	export default {
+		name:'my-articles',
 		data() {
 			return {
-				articleDto : {
-					title : ''
-				},
-				article : [] ,
-				search : ''
-			} 
-		},
-		
-		created : function(){
-			this.axios.get(this.baseURL+  '/article').then(response=>{
-				this.article = response.data.data;
-			})
-		}	,
-		
-		methods:{
-			
-			check () {
-				this.articleDto.title = this.search;
-				this.axios.post(this.baseURL + '/articles' ,JSON.stringify(this.articleDto)).then(response => {
-								this.article = response.data.data;
-								alert(response.data.data.length);
-								});
+				articles: [],
+				keywords: '',
+				currentPage: 1,
+				count: 5
 			}
-		}
+		},
+		created: function() {
+			this.keywords = this.$route.query.keywords
+			console.log(this.keywords)
+			if(this.keywords != ''){
+			this.axios.get(this.GlOBAL.servelUrl + '/article', {
+				params: {
+					keywords: this.keywords
+				}
+			}).
+			then(response => {
+				this.articles = response.data.data;
+				alert(response.data.data.length);
+			});
+			} else {
+				this.axios.get(this.GlOBAL.servelUrl + '/article',{
+					params: {
+						page: this.currentPage,
+						count: this.count
+					}
+				})
+				.then(res =>{
+					console.log(res.data.data);
+					this.articles = res.data.data;
+				});
+			}
+		},
+		methods: {}
 	}
-	
+
 </script>
-   
+
 <style>
-	
 </style>

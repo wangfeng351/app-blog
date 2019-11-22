@@ -1,8 +1,6 @@
 <template>
 	<div class="bl-container bl-df-jcenter">
 		<div class="bl-col-8 left">
-			<input type="search" v-model="ArticleDto.title">
-			<button @click="search(ArticleDto.title)" >搜索</button>
 			<!-- 主页轮播 -->
 			<div class="head">
 				<div class="carousel-wrap">
@@ -44,10 +42,10 @@
 			</div>
 		</div>
 		<div class="bl-col-4 right">
-			<!-- 博客专家 -->
+			<h3>博客专家</h3>
 			<div class="bl-df-c-center" v-for="(users, index) in users.slice(0,3)" :key = "index">
 			<div class = "bl-right-sideCard bl-df-left">
-				<div class="bl-content-avatar" @click="jump-personal">
+				<div class="bl-content-avatar">
 					<img :src="users.avatar" class="bl-btn-circle" alt="" @click="gotoPersonalDetail(users.id)">
 				</div>
 				<div class="bl-df-c-center">
@@ -61,12 +59,11 @@
 			</div>
 			</div>
 			
-			<!-- 博客周排行榜 -->
-			<div>
-				<h2>博客周排行榜</h2>
+			<div class="bl-wd-list">
+				<h3>博客周排行榜</h3>
 				<div class="bl-df-c-center" v-for="(users, index) in users.slice(10,14)" :key = "index">
 				<div class = "bl-right-sideCard bl-df-left">
-					<div class="bl-content-avatar" @click="jump-personal">
+					<div class="bl-content-avatar" >
 						<img :src="users.avatar" class="bl-btn-circle" alt="" @click="gotoPersonalDetail(users.id)">
 					</div>
 					<div class="bl-df-c-center">
@@ -109,7 +106,7 @@
 		created : function() {
 			
 			/* 查询所有文章 */
-			this.axios.get(this.baseURL+  '/article').then(response=>{
+			this.axios.get(this.GlOBAL.servelUrl+  '/article').then(response=>{
 				this.articles = response.data.data;
 			}),
 			
@@ -119,7 +116,7 @@
 			}),
 			
 			/* 查询所有用户 */
-			this.axios.get(this.baseURL+ '/users').then(res =>{
+			this.axios.get(this.GlOBAL.servelUrl+ '/users').then(res =>{
 				this.users = res.data.data;
 				console.log(res.data.data);
 			})
@@ -238,4 +235,9 @@
 	.user-descripiton {
 		height: 25px;
 	}
+	
+	.bl-wd-list {
+		margin-top: 20px;
+	}
+	
 </style>
