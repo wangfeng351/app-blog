@@ -21,7 +21,9 @@
 					</div>
 					
 					<div class="ar-right bl-df-c-center">
+						<router-link :to="{ path: '/article/' + article.id}">
 						<p class="bl-title">{{article.title}}</p>
+						</router-link>
 						<p class="article-description">{{article.description}}</p>
 						<p class="ar-comment bl-df-between">
 							<ul>
@@ -45,9 +47,9 @@
 			<h3>博客专家</h3>
 			<div class="bl-df-c-center" v-for="(users, index) in users.slice(0,3)" :key = "index">
 			<div class = "bl-right-sideCard bl-df-left">
-				<div class="bl-content-avatar">
-					<img :src="users.avatar" class="bl-btn-circle" alt="" @click="gotoPersonalDetail(users.id)">
-				</div>
+					<router-link :to="{ path: '/user/' + user.id}">
+					<img :src="users.avatar" class="bl-btn-circle bl-md-avatar" alt="">
+					</router-link>
 				<div class="bl-df-c-center">
 					<p class="bl-md-font bl-bd-font">{{users.nickname}}</p>
 					<p class="bl-msm-font user-descripiton">{{users.introduction.substring(0,30)+"..."}}</p>
@@ -63,9 +65,9 @@
 				<h3>博客周排行榜</h3>
 				<div class="bl-df-c-center" v-for="(users, index) in users.slice(10,14)" :key = "index">
 				<div class = "bl-right-sideCard bl-df-left">
-					<div class="bl-content-avatar" >
-						<img :src="users.avatar" class="bl-btn-circle" alt="" @click="gotoPersonalDetail(users.id)">
-					</div>
+						<router-link :to="{ path: '/user/' + user.id}">
+						<img :src="users.avatar" class="bl-btn-circle bl-md-avatar" alt="">
+						</router-link>
 					<div class="bl-df-c-center">
 						<p class="bl-md-font bl-bd-font">{{users.nickname}}</p>
 						<p class="bl-msm-font user-descripiton">{{users.introduction.substring(0,30)+"..."}}</p>
@@ -118,16 +120,10 @@
 			/* 查询所有用户 */
 			this.axios.get(this.GlOBAL.servelUrl+ '/users').then(res =>{
 				this.users = res.data.data;
-				console.log(res.data.data);
 			})
 		},
 		
 		methods:{
-			
-			gotoPersonalDetail(id) {
-				 this.$router.push('/persondeatil?id=' + id);
-			},
-			
 			go() {
 				this.timer = setInterval(() => {
 					this.autoPlay()

@@ -5,12 +5,12 @@
 		</div>
 		<div class="bl-container">
 			<div class="bl-body bl-df-c-center">
-					<div class="first-row">
+					<!-- <div class="first-row">
 						<div class="bl-card bl-col-4  top-card" v-for="(avatar, index) in avatars" :key = "index">
 							<img :src="'https://images.weserv.nl/?url=' + avatar" alt="">
 						</div>
 						
-					</div>
+					</div> -->
 					<div class="second-row">
 					    <div class="bl-card bl-col-4 bottom-card" v-for="(sub, index) in subscription" :key = "index">
 					    <div class="card-head">

@@ -2,17 +2,29 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Nav from '@/views/Nav.vue'
-import Login from '@/views/Login.vue'
-import Forum from '@/views/Forum.vue'
+
+import SignIn from '@/views/SignIn.vue'
+import SignUp from '@/views/SignUp.vue'
+
 import Index from '@/views/Index.vue'
+import Forum from '@/views/Forum.vue'
 import Recommend from '@/views/Recommend.vue'
-import Article from '@/views/Article.vue'
-import Basic from '@/views/Basic.vue'
-import Empty from '@/views/Empty.vue'
-import Password from '@/views/Password.vue'
-import Personal from '@/views/Personal.vue'
-import PersonalDetail from '@/views/PersonalDetail.vue'
 import SubscriptionColumn from '@/views/SubscriptionColumn.vue'
+
+import Search from '@/views/Search.vue'
+import ArticleSearch from '@/views/ArticleSearch.vue'
+import TopicSearch from '@/views/TopicSearch.vue'
+import UserSearch from '@/views/UserSearch.vue'
+
+
+import ArticleDetail from '@/views/ArticleDetail.vue'
+import TopicDetail from '@/views/TopicDetail.vue'
+import Empty from '@/views/Empty.vue'
+
+import Personal from '@/views/Personal.vue'
+import Basic from '@/views/Basic.vue'
+import Password from '@/views/Password.vue'
+import PersonalDetail from '@/views/PersonalDetail.vue'
 
 
 Vue.use(VueRouter)
@@ -48,13 +60,38 @@ const routes = [
 			component : Empty
 		},
 		{
-			path : 'persondeatil',
+			path : 'user/:id',
 			component : PersonalDetail
 		},
 		{
-			name : 'my-articles',
-			path : 'article',
-			component : Article
+			path : 'article/:id',
+			component : ArticleDetail,
+		},
+		{
+			path : 'topic/:id',
+			component : TopicDetail,
+		},
+		{
+			path : 'search',
+			component : Search,
+			children :[
+				{
+					path : '/',
+					redirect : 'article'
+				},
+				{
+					path : 'article',
+					component : ArticleSearch
+				},
+				{
+					path : 'topic',
+					component : TopicSearch
+				},
+				{
+					path : 'user',
+					component : UserSearch
+				},
+			]
 		},
 		{
 			path : 'personal' ,
@@ -77,8 +114,12 @@ const routes = [
 	]
   },
   {
-    path: '/login',
-    component : Login    
+    path: '/signIn',
+    component : SignIn    
+  },
+  {
+    path: '/signUp',
+    component : SignUp    
   },
  
 ]

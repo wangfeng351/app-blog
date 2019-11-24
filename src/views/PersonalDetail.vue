@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<div class=" bl-df-center">
+		<h2>个人详情页</h2>
+		<!-- <div class=" bl-df-center">
 			<div class="bl-col-8 left">
 				<div class="top bl-df-between">
 					<div class="bl-df-start">
@@ -38,7 +39,7 @@
 					<span class="tab-item">热门</span>
 			    </div>
 				<div class="tab-box">
-					<div class="bl-df-c-center" v-for="(use, index) in userArticle" :key = "index">
+					<div class="bl-df-c-center" v-for="(use, index) in user" :key = "index">
 						<div class="bl-article-recommendation at bl-df-between-up">
 							<div class="bl-df-c-center">
 								<p class="bl-lg-font bl-bd-font">{{use.title}}</p>
@@ -62,7 +63,7 @@
 			<div class="bl-col-4 right">
 				
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -71,30 +72,15 @@
 		data(){
 			
 			return {
-				user:{},
-				userArticle : []
+				user: {}
 			}
 		},
 		created: function() {
-			/* 获取网页地址url */
-		    var query = window.location.href;
-            /* 锁定到最后一个"="的位置 */
-			var i = query.lastIndexOf("=");
-			/* 取出"="之后的字符串   左闭右开*/
-			var id = query.substring(i+1);
-			// let currentPath = this.$router.path
-			/* 获取对应作者id的信息 */
-			this.axios.get(this.GlOBAL.servelUrl + '/users/' + id).then(res =>{
-				this.user = res.data.data;
-			}),
-			
-			/* 两表联查 */
-			this.axios.get(this.GlOBAL.servelUrl + '/article/' + id).then(response =>{
-				this.userArticle = response.data.data;
-				console.log("1")
+			var id = this.$route.params.id;
+			this.axios.get(this.GlOBAL.servelUrl+  '/user/' + id).then(response=>{
+				this.article = response.data.data;
 				console.log(response.data.data)
-			})
-			
+			});
 		},
 		methods:{
 			

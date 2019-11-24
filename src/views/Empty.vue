@@ -11,7 +11,7 @@
 		
 		mounted() {
 			this.keywords = this.$route.query.keywords;
-			this.$route.push({path: 'article', query: { keywords: this.keywords}});
+			this.$router.push({path: '/article', query: { keywords: this.keywords}});
 		}
 	}
 </script>

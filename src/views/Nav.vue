@@ -34,7 +34,7 @@
 					<router-link to="/">退出</router-link>
 				</li>
 				<li v-if="!this.user">
-					<router-link to="/login">登录</router-link>
+					<router-link to="/signIn">登录</router-link>
 				</li>
 			</ul>
 		</div>
@@ -60,15 +60,21 @@
 		methods: {
 			
 			search() {
-				 let currentPath = this.$router.path
-				 if(currentPath != '/article'){
+				 /* 获取网页地址url */
+				 var currentPath = window.location.href;
+				 /* 锁定到最后一个"="的位置 */
+				 var start = currentPath.lastIndexOf("/");
+				 /* 取出"="之后的字符串   左闭右开*/
+				 var end = currentPath.indexOf("?");
+				 var id = currentPath.substring(start, end);
+				 if(id != '/search' || currentPath != '/search/article' || currentPath != '/search/topic' || currentPath != '/search/user'){
 				 this.$router.push({
-					path: 'article',
+					path: '/search',
 					query: {
 						keywords: this.keywords
 					}
 				})}else {
-					this.$router.push({path:'empty', query:{keywords: this.keywords}})
+					this.$router.push({path:'/empty', query:{keywords: this.keywords}})
 				}
 			},
 

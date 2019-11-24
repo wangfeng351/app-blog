@@ -7,7 +7,9 @@
 				</div>
 				<div class="bl-card c" v-for="(article, index) in articles" :key="index">
 					<div class="title-colum bl-df-between">
-						<div class="bl-col-8 bl-sub-title">{{article.title}}</div>
+						<p class="bl-col-8 bl-sub-title">
+							<router-link :to= "{ path: '/article/' + article.id}">{{article.title}}</router-link>
+							</p>
 						<div class="bl-df-around bl-col-4 bl-msm-font">
 							<span>提问人:{{article.authorId}}</span>
 							<span>回复数:{{article.forwardAccount}}</span>
@@ -20,7 +22,7 @@
 				<h3>荣誉榜</h3>
 				<div class="bl-df-c-center" v-for="(user, index) in users.slice(20,23)" :key = "index">
 				<div class = "bl-right-sideCard bl-df-left">
-					<div class="bl-content-avatar" @click="jump-personal">
+					<div class="bl-md-avatar" @click="jump-personal">
 						<img :src="user.avatar" class="bl-btn-circle" alt="" @click="gotoPersonalDetail(user.id)">
 					</div>
 					<div class="bl-df-c-center">
@@ -35,7 +37,7 @@
 				<h3>论坛标兵</h3>
 				<div class="bl-df-c-center" v-for="(user, index) in users.slice(14,18)" :key="index">
 					<div class="bl-right-sideCard bl-df-left">
-						<div class="bl-content-avatar" @click="jump-personal">
+						<div class="bl-md-avatar" @click="jump-personal">
 							<img :src="user.avatar" class="bl-btn-circle" alt="" @click="gotoPersonalDetail(user.id)">
 						</div>
 						<div class="bl-df-c-center">
