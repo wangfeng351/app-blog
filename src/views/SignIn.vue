@@ -45,15 +45,18 @@
 	  
 	  methods: {
 		refresh() {
-					this.codeUrl = '';
-					var number = Math.ceil(Math.random() * 10);
-					this.codeUrl =  this.GlOBAL.servelUrl + '/code?num = ' + number;
+					this.axios.get(this.GlOBAL.servelUrl + '/code', { responseType: 'blob' }).then(res => {
+									console.log(res);
+									var img = this.$refs.codeImg;
+									let url = window.URL.createObjectURL(res.data);
+									img.src = url;
+								});
 				},
 		
 	    signIn(userDto) {
                 this.axios({
 					method: 'post',
-					url: this.GlOBAL.servelUrl + '/sign-in',
+					url: this.GlOBAL.servelUrl + '/users/sign-in',
 					data: JSON.stringify(this.userDto),
 					headers:{
 						'Access-Token': this.token

@@ -9,28 +9,31 @@
 						<div class="bl-card bl-col-4  top-card" v-for="(avatar, index) in avatars" :key = "index">
 							<img :src="'https://images.weserv.nl/?url=' + avatar" alt="">
 						</div>
-						
+						s
 					</div> -->
 					<div class="second-row">
 					    <div class="bl-card bl-col-4 bottom-card" v-for="(sub, index) in subscription" :key = "index">
 					    <div class="card-head">
-						    <img :src="'https://images.weserv.nl/?url=' + sub.thumbNail" alt="">
+						    <img :src="'https://images.wesersv.nl/?url=' + sub.subScription.thumbNail" alt="">
 					    </div>
 					    <div class="card-body bl-df-c-center">
-						    <p class="bl-lg-font">{{sub.description}}</p>
+						    <p class="bl-lg-font">{{sub.subScription.description}}</p>
 						    <p class="bl-sub-title">初学者必会</p>
 						    <p class="bl-df-between bl-sm-font  price-p">
-								<span>{{sub.chaptersNumber}}        </span>
-								<span>{{sub.subScriptionAccount}}</span>
+								<span>{{sub.subScription.chaptersNumber}}        </span>
+								<span>{{sub.subScription.subScriptionAccount}}</span>
 							</p>
 						    <p class="bl-md-font bl-df-between">
-								<span><!-- <img :src="sub.authorAvatar" alt=""> -->作者:{{sub.nickName}}</span>
-								<span>￥{{sub.price}}.00</span>
+								<span><!-- <img :src="sub.authorAvatar" alt=""> -->作者:{{sub.user.nickName}}</span>
+								<span>￥{{sub.subScription.price}}.00</span>
 							</p>
 						    <p class="bl-df-center"><button class="bl-btn bl-btn-round sub-scription-btn bl-md-font">订阅</button></p>
 					    </div>
 					    </div>
+						<div class="bl-col-12 bl-df-center">
+							<button @click="loadMore" class="bl-btn bl-btn-round load-btn">加载更多</button>...</div>
 					</div>
+			
 			</div>
 		</div>
 	</div>
@@ -41,7 +44,7 @@
 		data() {
 			return {
 				articleDto : {
-					title : ''
+					title : '',
 				},
 				avatars : [
 					"https://s1.51cto.com/images/blog/201909/19/74f160111fe842417e361a2c71505d35.jpg",
@@ -49,19 +52,53 @@
 					"https://s1.51cto.com/images/blog/201903/26/cc7aa36a6e610ce9e97e8f67672ab283.png",
 				],
 				subscription : [] ,
-				search : ''
+				search : '',
+				currentPage: 1,
+				count:6,
+				busy:true
 				} 
 		},
 		
 		created : function(){
-			this.axios.get(this.GlOBAL.servelUrl + '/colum').then(res =>{
-				this.subscription = res.data.data;
+			this.axios.get(this.GlOBAL.servelUrl + '/colum', {
+				params: {
+					page: this.currentPage,
+					count : this.count
+				}
 			})
+			.then(res =>{
+				this.subscription = res.data.data;
+			});
 
 		}	,
 		
 		methods:{
-			
+			loadMore(){
+				// this.busy = true;
+				// setTimeout(() => {
+					this.currentPage = this.currentPage+1;
+					this.axios.get(this.GlOBAL.servelUrl + '/colum', {
+						params: {
+							page : this.currentPage,
+							count : this.count
+						}
+					})
+					.then(res =>{
+						console.log(res.data.data.length);
+						console.log(res.data.data);
+						let temp = [];
+						temp = res.data.data;
+						for(var i = 0; i< temp.length; i++){
+							// splice替换下标为currentPage*count,长度为0的值为temp[i]
+							this.subscription.splice(this.currentPage * this.count, 0, temp[i]);
+						}
+						console.log(this.subscription.length);
+					});
+					// this.busy = false;
+				// }, 1000);
+				
+				    
+			}
 		}
 	}
 	
@@ -73,6 +110,11 @@
 		height: 100px;
 		width: 100%;
 		background-image: linear-gradient(to right, #8fadb0, #ddd, #8fadb0);
+	}
+	
+	.load-btn {
+		width: 120px;
+		height: 40px;
 	}
 	
 	.title {

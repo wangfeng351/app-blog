@@ -21,7 +21,7 @@ import ArticleDetail from '@/views/ArticleDetail.vue'
 import TopicDetail from '@/views/TopicDetail.vue'
 import Empty from '@/views/Empty.vue'
 
-import Personal from '@/views/Personal.vue'
+import UserDetail from '@/views/UserDetail.vue'
 import Basic from '@/views/Basic.vue'
 import Password from '@/views/Password.vue'
 import PersonalDetail from '@/views/PersonalDetail.vue'
@@ -61,7 +61,7 @@ const routes = [
 		},
 		{
 			path : 'user/:id',
-			component : PersonalDetail
+			component : UserDetail
 		},
 		{
 			path : 'article/:id',
@@ -95,21 +95,7 @@ const routes = [
 		},
 		{
 			path : 'personal' ,
-			component : Personal,
-			children :[
-				{
-					path : '/',
-					redirect : 'basic'
-				},
-				{
-					path : 'basic',
-					component : Basic
-				},
-				{
-					path : 'password',
-					component : Password
-				}
-			]
+			component : PersonalDetail,
 		}
 	]
   },

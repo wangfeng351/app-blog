@@ -38,7 +38,7 @@
 				</li>
 			</ul>
 		</div>
-		<div>
+		<div class="bl-nav-top">
 			<router-view class="bl-container" />
 		</div>
 	</div>
@@ -67,7 +67,8 @@
 				 /* 取出"="之后的字符串   左闭右开*/
 				 var end = currentPath.indexOf("?");
 				 var id = currentPath.substring(start, end);
-				 if(id != '/search' || currentPath != '/search/article' || currentPath != '/search/topic' || currentPath != '/search/user'){
+				 alert(id)
+				 if(id != '/search' || currentPath != '/article' || currentPath != '/search/topic' || currentPath != '/search/user'){
 				 this.$router.push({
 					path: '/search',
 					query: {
@@ -88,12 +89,16 @@
 
 <style scoped>
 	.nav {
-		height: 60px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 80px;
 		width: 100%;
 		padding-left: 60px;
 		padding-right: 60px;
 		background-color: #1E9FFF;
 		margin: 0 auto;
+		z-index: 1000;
 	}
 
 	img {

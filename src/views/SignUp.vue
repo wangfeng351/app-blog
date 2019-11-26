@@ -2,8 +2,8 @@
 	<div class="bl-df-center body">
 		<div class="bl-card signUp-box">
 			<input type="text" placeholder="输入手机号" v-model="userDto.mobile">
-			<input type="text" placeholder="输入密码" v-model="userDto.password">
-			<input type="text" placeholder="确认密码" v-model="password">
+			<input type="password" placeholder="输入密码" v-model="userDto.password">
+			<input type="password" placeholder="确认密码" v-model="password">
 			<button class="sure-btn bl-btn" @click="signUp(userDto)">确认注册</button>
 		</div>
 	</div>
@@ -27,12 +27,12 @@
 			signUp(userDto) {
 				this.axios({
 					method: 'post',
-					url: this.GLOBAL.baseUrl + '/user/sign-up',
+					url: this.GlOBAL.servelUrl + '/users/sign-up',
 					data: JSON.stringify(this.userDto)
 				}).then(res => {
-					if (res.data.msg === '注册成功') {
+					if (res.data.msg === '添加成功') {
 						alert('注册成功');
-						this.$router.push('/sign-in');
+						this.$router.push('/signIn');
 					} else {
 						alert(res.data.msg);
 					}

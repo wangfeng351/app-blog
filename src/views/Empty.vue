@@ -8,7 +8,6 @@
 				keywords: ''
 			};
 		},
-		
 		mounted() {
 			this.keywords = this.$route.query.keywords;
 			this.$router.push({path: '/article', query: { keywords: this.keywords}});

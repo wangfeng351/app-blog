@@ -2,12 +2,8 @@
 	<div class="bod">
 		<div class="left">
 	<ul>
-		<li>
-			<router-link to="/personal/basic">基本信息</router-link>
-		</li>
-		<li>
-			<router-link to="/personal/password">密码</router-link>
-		</li>
+		<li></li>
+		<li></li>
 	</ul>
 	</div>
 	<div class="right">
@@ -45,24 +41,4 @@
 		color: #333333;
 	}
 	
-	.bod {
-		
-		display: flex;
-		width: 80%;
-		margin: 0 auto;
-		margin-top: 20px;
-		height: 600px;
-		border: 1px solid red;
-		
-	}
-	
-	.left {
-		flex: 0 0 20%;
-		height: 100%;
-	}
-	.right {
-		flex:0 0 78%;
-		margin-left: 5px;
-		border: 1px solid #000000;
-	}
 </style>

@@ -14,43 +14,20 @@
 
 <script>
 	export default {
-		name:'my-articles',
 		data() {
 			return {
-				articles: [],
-				keywords: '',
-				currentPage: 1,
-				count: 5
-			}
+				keywords: ''
+			};
 		},
-		created: function() {
-			this.keywords = this.$route.query.keywords
-			if(this.keywords != ''){
-			this.axios.get(this.GlOBAL.servelUrl + '/article', {
-				params: {
-					keywords: this.keywords
-				}
-			}).
-			then(response => {
-				this.articles = response.data.data;
-			});
-			} else {
-				this.axios.get(this.GlOBAL.servelUrl + '/article',{
-					params: {
-						page: this.currentPage,
-						count: this.count
-					}
-				})
-				.then(res =>{
-					console.log(res.data.data);
-					this.articles = res.data.data;
-				});
-			}
+		
+		created() {
+			this.keywords = this.$route.query.keywords;
 		},
+		computed: {},
 		methods: {}
-	}
-
+	};
 </script>
+
 
 <style scoped>
     .tab {

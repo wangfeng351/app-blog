@@ -17,7 +17,7 @@
 			<div class="bl-card" v-for="(article, index) in articles.slice(0,4)" :key = "index">
 				<div class="bl-article-recommendation bl-df-center ">
 					<div class="ar-avatar">
-						<img :src = "'https://images.weserv.nl/?url='+article.avatar">
+						<img :src = "'https://images.weserv.nl/?url='+ article.thumbnail">
 					</div>
 					
 					<div class="ar-right bl-df-c-center">
@@ -47,7 +47,7 @@
 			<h3>博客专家</h3>
 			<div class="bl-df-c-center" v-for="(users, index) in users.slice(0,3)" :key = "index">
 			<div class = "bl-right-sideCard bl-df-left">
-					<router-link :to="{ path: '/user/' + user.id}">
+					<router-link :to="{ path: '/user/' + users.id}">
 					<img :src="users.avatar" class="bl-btn-circle bl-md-avatar" alt="">
 					</router-link>
 				<div class="bl-df-c-center">
@@ -65,7 +65,7 @@
 				<h3>博客周排行榜</h3>
 				<div class="bl-df-c-center" v-for="(users, index) in users.slice(10,14)" :key = "index">
 				<div class = "bl-right-sideCard bl-df-left">
-						<router-link :to="{ path: '/user/' + user.id}">
+						<router-link :to="{ path: '/user/' + users.id}">
 						<img :src="users.avatar" class="bl-btn-circle bl-md-avatar" alt="">
 						</router-link>
 					<div class="bl-df-c-center">
@@ -120,7 +120,7 @@
 			/* 查询所有用户 */
 			this.axios.get(this.GlOBAL.servelUrl+ '/users').then(res =>{
 				this.users = res.data.data;
-			})
+			})	
 		},
 		
 		methods:{

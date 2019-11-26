@@ -23,6 +23,15 @@ ul {
 	list-style: none;
 }
 
+
+.bl-nav-top {
+	margin-top: 90px;
+}
+
+.bl-color-blue {
+	color: rgb(3, 149, 255);
+}
+
 /* 布局设定 */
 /* flex布局,居中对齐 */
 .bl-df-jcenter {
@@ -61,6 +70,12 @@ ul {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
+}
+
+.bl-df-between-end {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
 }
 
 /* flex布局,垂直左对齐 */
@@ -320,8 +335,8 @@ h6 {
 }
 
 .bl-avatar {
-	height: 40px;
-	width: 40px;
+	height: 50px;
+	width: 50px;
 }
 
 .body {
